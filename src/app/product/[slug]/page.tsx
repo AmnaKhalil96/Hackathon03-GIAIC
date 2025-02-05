@@ -1,14 +1,15 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import sanityClient from "@/sanity/lib/client"
-import type { fullProduct } from "@/app/interface"
-import { Star } from "lucide-react"
-import { useCartStore } from "@/store/cartStore"
-import { HiOutlineShoppingBag } from "react-icons/hi2"
-import clsx from "clsx"
-import { urlForImage } from "@/sanity/lib/image"
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Image from "next/image"; // ✅ Import Next.js Image
+import sanityClient from "@/sanity/lib/client";
+import type { fullProduct } from "@/app/interface";
+import { Star } from "lucide-react";
+import { useCartStore } from "@/store/cartStore";
+import { HiOutlineShoppingBag } from "react-icons/hi2";
+import clsx from "clsx";
+import { urlForImage } from "@/sanity/lib/image";
 
 async function getData(slug: string): Promise<fullProduct | null> {
   const query = `*[_type == "foodProduct" && slug.current == $slug][0]{
@@ -23,26 +24,26 @@ async function getData(slug: string): Promise<fullProduct | null> {
       name
     },
     createdAt
-  }`
+  }`;
 
-  return await sanityClient.fetch(query, { slug })
+  return await sanityClient.fetch(query, { slug });
 }
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
-  const { addToCart, totalItems } = useCartStore()
-  const [data, setData] = useState<fullProduct | null>(null)
-  const [mounted, setMounted] = useState(false)
-  const [selectedImage, setSelectedImage] = useState<string>("")
+  const { addToCart, totalItems } = useCartStore();
+  const [data, setData] = useState<fullProduct | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string>("");
 
   useEffect(() => {
     getData(params.slug).then((product) => {
-      setData(product)
+      setData(product);
       if (product?.images?.length) {
-        setSelectedImage(urlForImage(product.images[0]).url()) // Set first image as default large image
+        setSelectedImage(urlForImage(product.images[0]).url());
       }
-    })
-    setMounted(true)
-  }, [params.slug])
+    });
+    setMounted(true);
+  }, [params.slug]);
 
   if (!data) {
     return (
@@ -56,15 +57,15 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           .
         </p>
       </div>
-    )
+    );
   }
 
-  const { name, images, description, price, category } = data
-  const rating = data.rating ?? 0
-  const productPrice = price ?? 0
+  const { name, images, description, price, category } = data;
+  const rating = data.rating ?? 0;
+  const productPrice = price ?? 0;
 
   const handleAddToCart = () => {
-    const imageUrl = selectedImage || "/default-image.png"
+    const imageUrl = selectedImage || "/default-image.png";
 
     addToCart({
       id: data._id,
@@ -72,8 +73,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       price: productPrice,
       image: imageUrl,
       quantity: 1,
-    })
-  }
+    });
+  };
 
   return (
     <div className="bg-white">
@@ -102,28 +103,31 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {/* Left Side Small Images */}
             <div className="flex flex-col space-y-2">
               {images?.slice(0, 3).map((img, index) => {
-                const imageUrl = urlForImage(img).url()
+                const imageUrl = urlForImage(img).url();
                 return (
-                  <img
+                  <Image
                     key={index}
                     src={imageUrl}
                     alt={`Thumbnail ${index + 1}`}
+                    width={80} // ✅ Add width
+                    height={80} // ✅ Add height
                     className={clsx(
                       "w-20 h-20 object-cover cursor-pointer border border-gray-300 hover:border-yellow-500 transition",
                       selectedImage === imageUrl && "border-2 border-yellow-500"
                     )}
                     onClick={() => setSelectedImage(imageUrl)}
                   />
-                )
+                );
               })}
             </div>
 
             {/* Main Large Image */}
-            <div className="ml-4 flex-grow">
-              <img
+            <div className="ml-4 flex-grow relative w-full h-[400px]">
+              <Image
                 src={selectedImage}
                 alt="Selected"
-                className="w-full h-[400px] object-cover border border-gray-300 transition-all"
+                fill // ✅ Make it responsive
+                className="object-cover border border-gray-300 transition-all"
               />
             </div>
           </div>
@@ -140,7 +144,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                   key={index}
                   className={clsx(
                     "h-5 w-5",
-                    index < Math.round(rating) ? "text-yellow-500 fill-yellow-500" : "text-gray-300",
+                    index < Math.round(rating) ? "text-yellow-500 fill-yellow-500" : "text-gray-300"
                   )}
                 />
               ))}
@@ -164,5 +168,5 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

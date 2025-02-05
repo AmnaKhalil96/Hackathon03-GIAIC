@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { MdLockOutline } from "react-icons/md";
@@ -51,27 +50,13 @@ export default function SignInPage() {
           <h1 className="text-2xl font-bold text-yellow-500">FoodTuck</h1>
           <nav className="lg:block hidden">
             <ul className="flex space-x-6">
-              <li>
-                <Link href="/">Home</Link>
-              </li>
-              <li>
-                <Link href="/ourmenu">Menu</Link>
-              </li>
-              <li>
-                <Link href="/blog">Blog</Link>
-              </li>
-              <li>
-                <Link href="/ourchef">Chef</Link>
-              </li>
-              <li>
-                <Link href="/aboutus">About</Link>
-              </li>
-              <li>
-                <Link href="/Newest">Shop</Link>
-              </li>
-              <li>
-                <Link href="/signup">Sign Up</Link>
-              </li>
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/ourmenu">Menu</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
+              <li><Link href="/ourchef">Chef</Link></li>
+              <li><Link href="/aboutus">About</Link></li>
+              <li><Link href="/Newest">Shop</Link></li>
+              <li><Link href="/signup">Sign Up</Link></li>
             </ul>
           </nav>
         </div>
@@ -85,10 +70,7 @@ export default function SignInPage() {
         <div className="text-center text-white">
           <h2 className="text-4xl font-bold">Sign In Page</h2>
           <p className="pt-2">
-            <Link href="/" className="text-yellow-400">
-              Home
-            </Link>{" "}
-            › Sign In
+            <Link href="/" className="text-yellow-400">Home</Link> › Sign In
           </p>
         </div>
       </section>
@@ -147,7 +129,7 @@ export default function SignInPage() {
           </form>
           <div className="text-center mt-4">
             <p>
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/signup" className="text-yellow-500">
                 Sign Up
               </Link>

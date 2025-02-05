@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+
 import { useState } from "react";
 import Link from "next/link";
 import { AiOutlineUser } from "react-icons/ai";
@@ -52,27 +52,13 @@ export default function SignUpPage() {
           <h1 className="text-2xl font-bold text-yellow-500">FoodTuck</h1>
           <nav className="lg:block hidden">
             <ul className="flex space-x-6">
-              <li>
-                <Link href="/">Home</Link>
-              </li>
-              <li>
-                <Link href="/ourmenu">Menu</Link>
-              </li>
-              <li>
-                <Link href="/blog">Blog</Link>
-              </li>
-              <li>
-                <Link href="/ourchef">Chef</Link>
-              </li>
-              <li>
-                <Link href="/aboutus">About</Link>
-              </li>
-              <li>
-                <Link href="/Newest">Shop</Link>
-              </li>
-              <li>
-                <Link href="/signin">Signin</Link>
-              </li>
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/ourmenu">Menu</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
+              <li><Link href="/ourchef">Chef</Link></li>
+              <li><Link href="/aboutus">About</Link></li>
+              <li><Link href="/Newest">Shop</Link></li>
+              <li><Link href="/signin">Signin</Link></li>
             </ul>
           </nav>
         </div>
@@ -86,10 +72,7 @@ export default function SignUpPage() {
         <div className="text-center text-white">
           <h2 className="text-4xl font-bold">Sign up page</h2>
           <p className="pt-2">
-            <Link href="/" className="text-yellow-400">
-              Home
-            </Link>{" "}
-            › Sign up
+            <Link href="/" className="text-yellow-400">Home</Link> › Sign up
           </p>
         </div>
       </section>
@@ -163,9 +146,7 @@ export default function SignUpPage() {
           <div className="text-center mt-4">
             <p>
               Already have an account?{" "}
-              <Link href="/signin" className="text-yellow-500">
-                Sign In
-              </Link>
+              <Link href="/signin" className="text-yellow-500">Sign In</Link>
             </p>
           </div>
         </div>

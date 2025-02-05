@@ -3,16 +3,17 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
 
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
+  display: "swap", // ✅ Add this to fix the warning
 });
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+  display: "swap", // ✅ Add this to fix the warning
 });
 
 export const metadata: Metadata = {
@@ -27,19 +28,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body
-        className={`${geistSans.variable}  ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        
         {children}
-        <Footer/>
-        
+        <Footer />
       </body>
     </html>
   );
